@@ -43,7 +43,7 @@ def plurial_scatter(inc_energy, at_num, at_wht, density, tilt_deg, traj_num, deb
     
     while num < traj_num:
         x, y, z, cx, cy, cz = reset_coordinates(s_tilt, c_tilt)
-        for k in xrange(0, 49):
+        for k in range(0, 49):
             sp, cp, ga = p_scatter(rf, E, k)
             xn, yn, zn, ca, cb, cc = new_coord(step, cp, sp, ga, x, y, z, cx, cy, cz)
             
@@ -87,7 +87,7 @@ def compute_bethe_range(inc_energy, mn_ion_pot, at_num, at_wht, density):
     
     # a Simpson's rule integration.
     # 20 equal steps.
-    for m in xrange(1, 21):
+    for m in range(1, 21):
         energy = (m - 1.0) * inc_energy / 20.0
         f = 1.0 / stop_pwr(energy, mn_ion_pot, at_num, at_wht)
         
@@ -119,7 +119,7 @@ def profile(inc_energy, m_t_step, mn_ion_pot, at_num, at_wht):
     E = []
     E.append(inc_energy)
     
-    for m in xrange(2, 51):
+    for m in range(2, 51):
         A1 = m_t_step * stop_pwr(E[-1], mn_ion_pot, at_num, at_wht)
         A2 = m_t_step * stop_pwr(E[-1] - A1/2.0, mn_ion_pot, at_num, at_wht)
         A3 = m_t_step * stop_pwr(E[-1] - A2/2.0, mn_ion_pot, at_num, at_wht)
@@ -132,7 +132,7 @@ def profile(inc_energy, m_t_step, mn_ion_pot, at_num, at_wht):
     
     e_smooth = []
     # A little smoothing of the profile.    
-    for m in xrange(1, 49):
+    for m in range(1, 49):
         e_smooth.append((E[m] + E[m+1])/2.0)
         
     assert len(E) == 51
