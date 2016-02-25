@@ -33,10 +33,10 @@ def plurial_scatter(inc_energy, at_num, at_wht, density, tilt_deg, traj_num, deb
     m_t_step, step = compute_bethe_range(inc_energy, mn_ion_pot, at_num, at_wht, density)
     E, e_smooth = profile(inc_energy, m_t_step, mn_ion_pot, at_num, at_wht)
 
-    print("m_t_step", m_t_step)
-    print("step", step)
-    for energy_ID, energy_keV  in enumerate(E):
-        print(energy_ID, energy_keV)
+#     print("m_t_step", m_t_step)
+#     print("step", step)
+#     for energy_ID, energy_keV  in enumerate(E):
+#         print(energy_ID, energy_keV)
 
     trajectories = []
 
@@ -62,7 +62,8 @@ def plurial_scatter(inc_energy, at_num, at_wht, density, tilt_deg, traj_num, deb
 
             if debug:
                 print(num, k, sp, cp, ga, xn, yn, zn, ca, cb, cc, E[k])
-            single_trajectories.append((xn, yn, zn))
+            if debug and num < 200:
+                single_trajectories.append((xn, yn, zn))
             if zn <= 0.0:
                 num, bk_sct = back_scatter(num, bk_sct)
                 break
