@@ -7,6 +7,7 @@ Created on Thu Apr 23 18:11:49 2015
 import logging
 import math
 import random
+import csv
 
 import matplotlib.pyplot as plt
 
@@ -317,10 +318,45 @@ def run_figure_6_1():
         line += "%f " % (bse)
     print(line)
 
+def run_figure_6_5():
+    print("Start figure 6.5 simulation")
+
+    traj_num = 100000
+
+    elements = []
+    elements.append((6, 12.011, 2.62, 0.0625724721707))
+    elements.append((13, 26.98, 2.7, 0.148075863868))
+    elements.append((14, 28.09, 2.33, 0.170487882653))
+    elements.append((26, 55.85, 7.86, 0.275218141234))
+    elements.append((29, 63.55, 8.96, 0.29910424397))
+    elements.append((47, 107.87, 10.5, 0.421003159787))
+    elements.append((79, 196.97, 19.3, 0.520543686224))
+
+    with open("figure_6.5_HD_100ke.csv", 'w', newline='\n') as bse_results_file:
+        bse_writer = csv.writer(bse_results_file)
+        row = ["energy (kV)"]
+        for element in elements:
+            row.append(element[0])
+        bse_writer.writerow(row)
+
+        for energy_keV in [1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60]:
+            row = [energy_keV]
+            for element in elements:
+                at_num, at_wht, density, bse_book = element
+
+                bse_coefficient, bse_coefficient_error = single_scatter(energy_keV, at_num, at_wht, density, traj_num)
+
+                print("%3i %2i %.4f %.4f" % (energy_keV, at_num, bse_coefficient, bse_coefficient_error))
+                row.append(bse_coefficient)
+
+            bse_writer.writerow(row)
+            bse_results_file.flush()
+
 if __name__ == "__main__":
     logging.getLogger().setLevel(logging.INFO)
 
-    run_carbon()
+    #run_carbon()
     #run_figure_6_1()
+    run_figure_6_5()
 
     plt.show()
