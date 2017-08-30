@@ -15,6 +15,7 @@ step = 1.0
 x_start = 0.0
 y_start = 0.0
 
+
 def random_walk(number_steps):
     """
     This stimulates a simple random walk with equal-length steps.
@@ -38,7 +39,8 @@ def random_walk(number_steps):
     distance = how_far(x, y)
     
     return distance, xs, ys
-    
+
+
 def initialize_coordinates():
     """
     Set up the starting values of all the parameters.
@@ -51,7 +53,8 @@ def initialize_coordinates():
     random.seed(random.randint(-100000, 100000))
     
     return x, y, CX, CY
-    
+
+
 def new_coord(x, y, CX, CY, theta_rad):
     """
     Compute the  new coordinates xn, yn, given x, y, CX, CY and theta.
@@ -68,8 +71,9 @@ def new_coord(x, y, CX, CY, theta_rad):
     yn = y + step*CB
     
     return xn, yn, CA, CB
-    
-def how_far(x ,y):
+
+
+def how_far(x, y):
     """
     Computes the distance traveled in the walk.
     """
@@ -77,7 +81,8 @@ def how_far(x ,y):
     distance = distance/step
     
     return distance
-    
+
+
 def run_figure2_4():
     maximum_number_steps = 800
     step = 100
@@ -111,7 +116,8 @@ def run_figure2_4():
     plt.ylabel('distance (steps)')
     plt.ylim(ymin=0)
     plt.xlim(xmin=0)
-    
+
+
 def run_figure2_4_better():
     maximum_number_steps = 10000
     step = 100
@@ -145,7 +151,8 @@ def run_figure2_4_better():
     plt.ylabel('distance (steps)')
     plt.ylim(ymin=0)
     plt.xlim(xmin=0)
-    
+
+
 def run_trajectories():
     number_steps = 200
     number_repetitions = 5
@@ -166,9 +173,8 @@ def run_trajectories():
 if __name__ == "__main__":
     logging.getLogger().setLevel(logging.INFO)
     
-    #run_trajectories()
-    #run_figure2_4()
-    run_figure2_4_better()
+    run_trajectories()
+    # run_figure2_4()
+    # run_figure2_4_better()
     
     plt.show()
-    
