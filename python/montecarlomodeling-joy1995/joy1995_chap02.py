@@ -85,9 +85,9 @@ def how_far(x, y):
 
 def run_figure2_4():
     maximum_number_steps = 800
-    step = 100
+    range_step = 100
     
-    number_steps_list = range(step, maximum_number_steps-step, step)
+    number_steps_list = range(range_step, maximum_number_steps+range_step, range_step)
     number_repetitions = 5
     
     means = []
@@ -118,11 +118,30 @@ def run_figure2_4():
     plt.xlim(xmin=0)
 
 
+def profile_figure2_4():
+    maximum_number_steps = 800
+    range_step = 100
+
+    number_steps_list = range(range_step, maximum_number_steps + range_step, range_step)
+    number_repetitions = 5
+
+    means = []
+    distances = {}
+    for number_steps in number_steps_list:
+        total = 0.0
+        for iteration in range(number_repetitions):
+            logging.debug("Number of steps: %i for iteration %i", number_steps, iteration + 1)
+            distance, _xs, _ys = random_walk(number_steps)
+            distances.setdefault(iteration, []).append(distance)
+            total += distance
+        means.append(total / float(number_repetitions))
+
+
 def run_figure2_4_better():
     maximum_number_steps = 10000
-    step = 100
+    range_step = 100
     
-    number_steps_list = range(step, maximum_number_steps-step, step)
+    number_steps_list = range(range_step, maximum_number_steps+range_step, range_step)
     number_repetitions = 100
     
     means = []
@@ -169,12 +188,14 @@ def run_trajectories():
         plt.ylabel('Y')
         plt.gca().set_aspect('equal', 'datalim')
         plt.grid(True)  
-   
+
+
 if __name__ == "__main__":
     logging.getLogger().setLevel(logging.INFO)
     
-    run_trajectories()
+    # run_trajectories()
     # run_figure2_4()
+    profile_figure2_4()
     # run_figure2_4_better()
     
-    plt.show()
+    # plt.show()
