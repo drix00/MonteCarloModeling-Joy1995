@@ -139,8 +139,7 @@ int main() {
     int number_steps = set_up_screen();
 
     initialize();
-    const double hstart = 0.0;
-    const double vstart = 0.0;
+
     const double step = 1.0;
 
     Point point = initialize_coordinates();
