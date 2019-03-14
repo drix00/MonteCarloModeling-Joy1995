@@ -8,3 +8,5 @@ syntax: glob
 *.sdf
 .idea
 */cmake-build-debug/*
+*/.vs/*
+*.DotSettings.user
